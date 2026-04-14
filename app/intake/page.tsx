@@ -1,6 +1,12 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://ysryrmvxuweqjtovqxeq.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcnlybXZ4dXdlcWp0b3ZxeGVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNDA4MTUsImV4cCI6MjA5MTcxNjgxNX0.vSWdtWxh_UxW8dDF3eSySe1QL-rqRc8FcwDplT7Mybg"
+);
 
 const PROS = ["ASCAP", "BMI", "SESAC", "SoundExchange", "The MLC", "Harry Fox Agency", "None yet"];
 const DISTRIBUTORS = ["DistroKid", "TuneCore", "CD Baby", "Amuse", "UnitedMasters", "Other / Direct"];
@@ -26,13 +32,18 @@ export default function IntakePage() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      const { error: dbError } = await supabase.from("audit_requests").insert({
+        name: form.name,
+        email: form.email,
+        stage_name: form.stageName,
+        distributor: form.distributor,
+        pros: form.pros,
+        song_count: form.songCount,
+        top_song: form.topSong,
+        notes: form.notes,
+        status: "pending",
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed");
+      if (dbError) throw new Error(dbError.message);
       setDone(true);
     } catch (e: any) {
       setError(e.message || "Something went wrong. Email contact@musicright.ai");
