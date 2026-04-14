@@ -71,7 +71,7 @@ export default function AuditProductPage() {
               <span className="text-[#555] text-sm mb-3">USD</span>
             </div>
             <a
-              href="https://buy.stripe.com/musicright-audit"
+              href="https://buy.stripe.com/test_cNi5kD5gnd7V8ZVbsV1RC00"
               className="w-full h-14 rounded-xl flex items-center justify-center gap-2 font-bold text-lg text-[#080808] transition-all"
               style={{ background: "linear-gradient(135deg, #00d4aa, #00b4d8)" }}
             >
