@@ -22,10 +22,10 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8 text-sm text-[#a0a0a0]">
-          <Link href="#features" className="hover:text-white transition-colors">Features</Link>
-          <Link href="#how-it-works" className="hover:text-white transition-colors">How it works</Link>
-          <Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
-          <Link href="#pricing" className="hover:text-white transition-colors">Pricing</Link>
+          <Link href="/#channels" className="hover:text-white transition-colors">Channels</Link>
+          <Link href="/#features" className="hover:text-white transition-colors">Features</Link>
+          <Link href="/#how-it-works" className="hover:text-white transition-colors">How it works</Link>
+          <Link href="/#pricing" className="hover:text-white transition-colors">Pricing</Link>
         </div>
 
         {/* CTA */}
@@ -34,10 +34,10 @@ export default function Navbar() {
             Sign in
           </Link>
           <Link
-            href="/audit"
+            href="/check"
             className="h-9 px-4 rounded-lg bg-[#00d4aa] text-[#080808] text-sm font-semibold hover:bg-[#00b894] transition-colors"
           >
-            Free audit →
+            Song Check →
           </Link>
         </div>
 
@@ -61,11 +61,11 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className="md:hidden border-t border-white/5 bg-[#080808] px-6 py-4 flex flex-col gap-4 text-sm">
-          <Link href="#features" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Features</Link>
-          <Link href="#pricing" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Pricing</Link>
-          <Link href="/dashboard" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Dashboard</Link>
-          <Link href="/audit" className="h-10 flex items-center justify-center rounded-lg bg-[#00d4aa] text-[#080808] font-semibold">
-            Free audit →
+          <Link href="/#channels" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Channels</Link>
+          <Link href="/#features" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Features</Link>
+          <Link href="/#pricing" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Pricing</Link>
+          <Link href="/check" className="h-10 flex items-center justify-center rounded-lg bg-[#00d4aa] text-[#080808] font-semibold">
+            Song Check →
           </Link>
         </div>
       )}

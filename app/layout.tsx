@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MusicRight.AI — Find Your Missing Royalties",
+  title: "MusicRight.AI — The Royalty Operating System for Music Creators",
   description:
-    "The royalty operations platform for independent artists. Audit your rights, close revenue gaps, and collect every dollar you've earned.",
-  keywords: "music royalties, ASCAP, BMI, MLC, SoundExchange, DMCA, music rights, royalty audit",
+    "Process song registrations, organize rights, activate royalty channels, and turn your music catalog into a cleaner financial asset. Free song check in 60 seconds.",
+  keywords: "music royalties, royalty setup, ASCAP, BMI, MLC, SoundExchange, YouTube Content ID, music rights, royalty operating system, music IP banking",
   openGraph: {
-    title: "MusicRight.AI — Find Your Missing Royalties",
-    description: "Audit your rights, close revenue gaps, collect every dollar you've earned.",
+    title: "MusicRight.AI — The Royalty Operating System for Music Creators",
+    description:
+      "Process song registrations, organize rights, activate royalty channels, and turn your music catalog into a cleaner financial asset.",
     type: "website",
   },
 };
