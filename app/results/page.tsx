@@ -90,6 +90,15 @@ function ResultsContent() {
     if (!parsed) parsed = intakeFromParams(sp);
     setIntake(parsed);
     setResult(diagnose(parsed));
+
+    // Fire-and-forget: persist to Supabase via API (non-blocking)
+    if (parsed?.email) {
+      fetch("/api/mvp-diagnose", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed),
+      }).catch(() => {});
+    }
   }, [sp]);
 
   if (!intake || !result) {
