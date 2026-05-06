@@ -40,17 +40,17 @@ const PRICING = [
   {
     name: "Song Check", price: "Free", sub: "Always free",
     features: ["1-song royalty review", "Royalty Health Score", "Earning Opportunities report", "Processing checklist", "Next money action"],
-    cta: "Run Free Song Check", href: "/check", highlight: false,
+    cta: "Run Free Song Check", href: "/start", highlight: false,
   },
   {
     name: "Setup", price: "$49", sub: "per song",
     features: ["Everything in Song Check", "Full royalty setup processing", "PRO & MLC registration", "ISRC generation", "Splits documentation", "SoundExchange setup"],
-    cta: "Set Up My Royalties", href: "/check", highlight: true,
+    cta: "Set Up My Royalties", href: "/start", highlight: true,
   },
   {
     name: "Done For You", price: "$149", sub: "per song",
     features: ["Everything in Setup", "We handle all submissions", "YouTube Content ID setup", "Social media monetization", "Global collection setup", "72-hour SLA guarantee"],
-    cta: "Get Done For You", href: "/check", highlight: false,
+    cta: "Get Done For You", href: "/start", highlight: false,
   },
 ];
 
@@ -79,10 +79,10 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-            <Link href="/check" className="h-12 px-6 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow">
+            <Link href="/start" className="h-12 px-6 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow">
               Set Up My Royalties →
             </Link>
-            <Link href="/check" className="h-12 px-6 rounded-xl border border-[#2e2e2e] text-[#a0a0a0] font-semibold text-base hover:border-[#00d4aa]/40 hover:text-white transition-all">
+            <Link href="/start" className="h-12 px-6 rounded-xl border border-[#2e2e2e] text-[#a0a0a0] font-semibold text-base hover:border-[#00d4aa]/40 hover:text-white transition-all">
               Run Free Song Check
             </Link>
           </div>
@@ -176,7 +176,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-white font-bold text-sm mb-1.5 group-hover:text-[#00d4aa] transition-colors">{ch.title}</h3>
                   <p className="text-[#555] text-xs leading-relaxed mb-3">{ch.desc}</p>
-                  <Link href="/check" className="text-[11px] font-bold text-[#00d4aa] hover:underline">
+                  <Link href="/start" className="text-[11px] font-bold text-[#00d4aa] hover:underline">
                     Let MusicRight Help Set This Up →
                   </Link>
                 </div>
@@ -184,7 +184,7 @@ export default function HomePage() {
             })}
           </div>
           <div className="text-center mt-10">
-            <Link href="/check" className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow">
+            <Link href="/start" className="inline-flex items-center gap-2 h-12 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow">
               Let MusicRight Process My Royalty Setup →
             </Link>
             <p className="text-[#555] text-xs mt-3">
@@ -308,7 +308,7 @@ export default function HomePage() {
             Most independent artists have songs that can generate royalties across 5–9 different
             channels — but aren&apos;t set up to collect from most of them. MusicRight helps you change that.
           </p>
-          <Link href="/check" className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-lg hover:bg-[#00b894] transition-all glow">
+          <Link href="/start" className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-lg hover:bg-[#00b894] transition-all glow">
             Set Up My Royalties →
           </Link>
           <p className="text-[#555] text-sm mt-4">Free song check · No credit card · Royalty Health Score in 60 seconds</p>
@@ -332,8 +332,8 @@ export default function HomePage() {
             <div>
               <div className="text-white font-semibold mb-3">Product</div>
               <div className="flex flex-col gap-2 text-[#555]">
-                <Link href="/check" className="hover:text-[#a0a0a0]">Song Check</Link>
-                <Link href="/check" className="hover:text-[#a0a0a0]">Royalty Setup</Link>
+                <Link href="/start" className="hover:text-[#a0a0a0]">Song Check</Link>
+                <Link href="/start" className="hover:text-[#a0a0a0]">Royalty Setup</Link>
                 <Link href="/dashboard" className="hover:text-[#a0a0a0]">Dashboard</Link>
                 <Link href="/#pricing" className="hover:text-[#a0a0a0]">Pricing</Link>
               </div>
