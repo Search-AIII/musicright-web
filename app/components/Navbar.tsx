@@ -1,9 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { createClient } from "../../lib/supabase-browser";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<{ name: string; avatar?: string; initial: string } | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user: u } }) => {
+      if (!u) return;
+      const name = u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split("@")[0] || "Artist";
+      setUser({ name, avatar: u.user_metadata?.avatar_url || u.user_metadata?.picture, initial: name[0].toUpperCase() });
+    });
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#080808]/90 backdrop-blur-xl">
@@ -28,24 +39,39 @@ export default function Navbar() {
           <Link href="/#pricing" className="hover:text-white transition-colors">Pricing</Link>
         </div>
 
-        {/* CTA */}
+        {/* Auth area */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/dashboard" className="text-sm text-[#a0a0a0] hover:text-white transition-colors">
-            Sign in
-          </Link>
-          <Link
-            href="/check"
-            className="h-9 px-4 rounded-lg bg-[#00d4aa] text-[#080808] text-sm font-semibold hover:bg-[#00b894] transition-colors"
-          >
-            Song Check →
-          </Link>
+          {user ? (
+            <>
+              <Link href="/dashboard" className="flex items-center gap-2 text-sm text-[#a0a0a0] hover:text-white transition-colors">
+                {user.avatar ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={user.avatar} alt={user.name} className="w-6 h-6 rounded-full" />
+                ) : (
+                  <div className="w-6 h-6 rounded-full bg-[#00d4aa]/20 flex items-center justify-center text-[#00d4aa] text-xs font-bold">
+                    {user.initial}
+                  </div>
+                )}
+                {user.name}
+              </Link>
+              <Link href="/start" className="h-9 px-4 rounded-lg bg-[#00d4aa] text-[#080808] text-sm font-semibold hover:bg-[#00b894] transition-colors">
+                + New Song Check
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/auth/login" className="text-sm text-[#a0a0a0] hover:text-white transition-colors">
+                Sign in
+              </Link>
+              <Link href="/start/first-time" className="h-9 px-4 rounded-lg bg-[#00d4aa] text-[#080808] text-sm font-semibold hover:bg-[#00b894] transition-colors">
+                Check My Song →
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile hamburger */}
-        <button
-          className="md:hidden text-[#a0a0a0]"
-          onClick={() => setOpen(!open)}
-        >
+        <button className="md:hidden text-[#a0a0a0]" onClick={() => setOpen(!open)}>
           {open ? (
             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
               <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -64,8 +90,17 @@ export default function Navbar() {
           <Link href="/#channels" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Channels</Link>
           <Link href="/#features" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Features</Link>
           <Link href="/#pricing" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Pricing</Link>
-          <Link href="/check" className="h-10 flex items-center justify-center rounded-lg bg-[#00d4aa] text-[#080808] font-semibold">
-            Song Check →
+          {user ? (
+            <Link href="/dashboard" className="h-10 flex items-center justify-center rounded-lg border border-[#2e2e2e] text-white font-semibold">
+              My Dashboard
+            </Link>
+          ) : (
+            <Link href="/auth/login" className="h-10 flex items-center justify-center rounded-lg border border-[#2e2e2e] text-white font-semibold">
+              Sign in
+            </Link>
+          )}
+          <Link href="/start/first-time" className="h-10 flex items-center justify-center rounded-lg bg-[#00d4aa] text-[#080808] font-semibold" onClick={() => setOpen(false)}>
+            Check My Song →
           </Link>
         </div>
       )}

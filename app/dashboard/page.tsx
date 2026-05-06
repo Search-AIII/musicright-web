@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { createClient } from "../../lib/supabase-browser";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Song {
@@ -106,6 +107,22 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<"overview" | "catalog" | "wallet" | "actions">("overview");
   const [showPayout, setShowPayout] = useState(false);
   const [payoutAmount, setPayoutAmount] = useState("");
+  const [userDisplay, setUserDisplay] = useState<{ name: string; avatar?: string; initial: string } | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!user) { window.location.href = "/auth/login"; return; }
+      const name = user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split("@")[0] || "Artist";
+      setUserDisplay({ name, avatar: user.user_metadata?.avatar_url || user.user_metadata?.picture, initial: name[0].toUpperCase() });
+    });
+  }, []);
+
+  async function handleSignOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    window.location.href = "/";
+  }
 
   const score = 68;
   const scoreColor = score >= 80 ? "#00d4aa" : score >= 60 ? "#ffb800" : "#ff4757";
@@ -180,9 +197,17 @@ export default function Dashboard() {
             <Link href="/audit" className="h-8 px-3 rounded-lg bg-[#00d4aa] text-[#080808] text-xs font-bold hover:bg-[#00b894] transition-colors">
               Fix all →
             </Link>
-            <div className="w-7 h-7 rounded-full bg-[#1a1a1a] border border-[#2e2e2e] flex items-center justify-center text-xs font-bold text-[#00d4aa]">
-              K
-            </div>
+            <button onClick={handleSignOut} className="text-[#555] text-xs hover:text-white transition-colors hidden sm:block">
+              Sign out
+            </button>
+            {userDisplay?.avatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={userDisplay.avatar} alt={userDisplay.name} className="w-7 h-7 rounded-full border border-[#2e2e2e]" />
+            ) : (
+              <div className="w-7 h-7 rounded-full bg-[#1a1a1a] border border-[#2e2e2e] flex items-center justify-center text-xs font-bold text-[#00d4aa]">
+                {userDisplay?.initial ?? "?"}
+              </div>
+            )}
           </div>
         </header>
 
