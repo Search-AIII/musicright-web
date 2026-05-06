@@ -64,30 +64,31 @@ export default function HomePage() {
         <div className="flex flex-col items-center text-center gap-6">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00d4aa]/20 bg-[#00d4aa]/5 text-[#00d4aa] text-xs font-semibold tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00d4aa] animate-pulse" />
-            ROYALTY OPERATING SYSTEM FOR MUSIC CREATORS
+            FREE SONG CHECK · ROYALTY HEALTH SCORE IN 60 SECONDS
           </div>
 
           <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.05] max-w-4xl">
-            The royalty operating system
+            Add one song. See what&apos;s
             <br />
-            <span className="gradient-text">for music creators.</span>
+            <span className="gradient-text">blocking your royalties.</span>
           </h1>
 
           <p className="text-[#a0a0a0] text-lg md:text-xl max-w-2xl leading-relaxed">
-            Process song registrations, organize rights, activate royalty channels, and turn your
-            music catalog into a cleaner financial asset.
+            MusicRight shows you missing registrations, blocked royalty routes, and a step-by-step plan
+            to get paid — across every channel your song can earn from.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-            <Link href="/start" className="h-12 px-6 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow">
-              Set Up My Royalties →
+          {/* Dual entry CTAs */}
+          <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-2 w-full max-w-md">
+            <Link href="/start/first-time" className="flex-1 h-12 px-6 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm hover:bg-[#00b894] transition-all glow flex items-center justify-center gap-2">
+              🎵 I&apos;m starting fresh
             </Link>
-            <Link href="/start" className="h-12 px-6 rounded-xl border border-[#2e2e2e] text-[#a0a0a0] font-semibold text-base hover:border-[#00d4aa]/40 hover:text-white transition-all">
-              Run Free Song Check
+            <Link href="/start/experienced" className="flex-1 h-12 px-6 rounded-xl border border-[#2e2e2e] text-white font-semibold text-sm hover:border-[#00d4aa]/40 transition-all flex items-center justify-center gap-2">
+              ⚡ I&apos;ve registered before
             </Link>
           </div>
 
-          <p className="text-[#555] text-sm">Free song check · No credit card required · Royalty Health Score in 60 seconds</p>
+          <p className="text-[#555] text-sm">Free · No credit card · Works for human-made and AI-assisted music</p>
         </div>
 
         {/* Dashboard preview */}
@@ -148,6 +149,33 @@ export default function HomePage() {
                 <button className="text-[10px] font-bold px-2 py-1 rounded-md" style={{ background: c.color + "15", color: c.color }}>Set Up →</button>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRUST BAR ── */}
+      <section className="py-12 px-6 border-t border-[#111]">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-center text-[#555] text-sm font-medium mb-8 uppercase tracking-wider">Built for</p>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            {[
+              { icon: "🎙️", label: "First-time creators", desc: "Never set up royalties before" },
+              { icon: "⚡", label: "Experienced artists", desc: "Accounts scattered across tools" },
+              { icon: "🤖", label: "AI-assisted music", desc: "Suno, Udio, and beyond" },
+            ].map((t) => (
+              <div key={t.label} className="rounded-xl p-4 border border-[#1a1a1a] bg-[#0e0e0e]">
+                <div className="text-2xl mb-2">{t.icon}</div>
+                <div className="text-white text-xs font-bold mb-1">{t.label}</div>
+                <div className="text-[#555] text-xs">{t.desc}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 rounded-2xl border border-[#1a1a1a] bg-[#0e0e0e] px-8 py-6 text-center">
+            <p className="text-white text-lg md:text-xl font-bold leading-relaxed">
+              You shouldn&apos;t need five tools and six logins
+              <span className="text-[#00d4aa]"> to get one song royalty-ready.</span>
+            </p>
+            <p className="text-[#555] text-sm mt-2">MusicRight organizes it all in one place.</p>
           </div>
         </div>
       </section>
@@ -301,17 +329,22 @@ export default function HomePage() {
       <section className="py-24 px-6 border-t border-[#111]">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6">
-            Your music is a financial asset.<br />
-            <span className="gradient-text">Is it set up to earn?</span>
+            Add one song.<br />
+            <span className="gradient-text">See what&apos;s blocking your royalties.</span>
           </h2>
           <p className="text-[#a0a0a0] text-base mb-8">
-            Most independent artists have songs that can generate royalties across 5–9 different
-            channels — but aren&apos;t set up to collect from most of them. MusicRight helps you change that.
+            Most independent artists have songs earning from fewer than half the channels they qualify for.
+            MusicRight helps you see the gaps and close them — step by step.
           </p>
-          <Link href="/start" className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-lg hover:bg-[#00b894] transition-all glow">
-            Set Up My Royalties →
-          </Link>
-          <p className="text-[#555] text-sm mt-4">Free song check · No credit card · Royalty Health Score in 60 seconds</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link href="/start/first-time" className="h-14 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow">
+              🎵 Check My Song Free →
+            </Link>
+            <Link href="/start/experienced" className="h-14 px-8 rounded-xl border border-[#2e2e2e] text-white font-semibold text-base hover:border-[#00d4aa]/40 transition-all">
+              ⚡ I&apos;ve Registered Before
+            </Link>
+          </div>
+          <p className="text-[#555] text-sm mt-4">Free · No credit card · 60 seconds</p>
         </div>
       </section>
 
