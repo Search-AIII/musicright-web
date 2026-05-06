@@ -1,0 +1,23 @@
+{
+  "name": "musicright-tools",
+  "version": "1.0.0",
+  "description": "MCP server and CLI for MusicRight royalty diagnosis",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "mcp": "node dist/mcp-server.js",
+    "cli": "node dist/cli.js"
+  },
+  "bin": {
+    "musicright": "./dist/cli.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}
