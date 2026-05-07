@@ -33,9 +33,11 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8 text-sm text-[#a0a0a0]">
+          <Link href="/generate" className="hover:text-white transition-colors flex items-center gap-1.5">
+            <span className="text-[#00d4aa] text-xs">✦</span> Generate
+          </Link>
           <Link href="/#channels" className="hover:text-white transition-colors">Channels</Link>
           <Link href="/#features" className="hover:text-white transition-colors">Features</Link>
-          <Link href="/#how-it-works" className="hover:text-white transition-colors">How it works</Link>
           <Link href="/#pricing" className="hover:text-white transition-colors">Pricing</Link>
         </div>
 
@@ -87,6 +89,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className="md:hidden border-t border-white/5 bg-[#080808] px-6 py-4 flex flex-col gap-4 text-sm">
+          <Link href="/generate" onClick={() => setOpen(false)} className="text-[#00d4aa] font-semibold hover:text-[#00b894] flex items-center gap-1.5"><span>✦</span> Generate Music</Link>
           <Link href="/#channels" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Channels</Link>
           <Link href="/#features" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Features</Link>
           <Link href="/#pricing" onClick={() => setOpen(false)} className="text-[#a0a0a0] hover:text-white">Pricing</Link>

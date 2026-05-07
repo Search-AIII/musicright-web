@@ -192,6 +192,18 @@ export default function HomePage() {
             </p>
             <p className="text-[#555] text-sm mt-2">MusicRight organizes it all in one place.</p>
           </div>
+
+          {/* Generate CTA */}
+          <div className="mt-4 rounded-2xl border border-[#00d4aa]/20 bg-gradient-to-br from-[#00d4aa]/5 to-transparent px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <div className="text-[#00d4aa] text-xs font-bold uppercase tracking-wider mb-1">✦ New — AI Music Generator</div>
+              <p className="text-white font-bold text-base">Describe your track. Get real AI music in 60 seconds.</p>
+              <p className="text-[#555] text-sm">Then register its royalties instantly — all in one place.</p>
+            </div>
+            <Link href="/generate" className="flex-shrink-0 h-11 px-6 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm hover:bg-[#00b894] transition-all glow whitespace-nowrap">
+              ✦ Try Generator →
+            </Link>
+          </div>
         </div>
       </section>
 
