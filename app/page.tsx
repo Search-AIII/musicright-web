@@ -60,8 +60,9 @@ export default function HomePage() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="pt-32 pb-20 px-6 max-w-6xl mx-auto">
-        <div className="flex flex-col items-center text-center gap-6">
+      <section className="pt-32 pb-20 px-6 max-w-6xl mx-auto relative overflow-hidden">
+        <div className="hero-glow" />
+        <div className="flex flex-col items-center text-center gap-6 relative">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00d4aa]/20 bg-[#00d4aa]/5 text-[#00d4aa] text-xs font-semibold tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00d4aa] animate-pulse" />
             FREE SONG CHECK · ROYALTY HEALTH SCORE IN 60 SECONDS
@@ -79,16 +80,30 @@ export default function HomePage() {
           </p>
 
           {/* Dual entry CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-2 w-full max-w-md">
-            <Link href="/start/first-time" className="flex-1 h-12 px-6 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm hover:bg-[#00b894] transition-all glow flex items-center justify-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch gap-3 mt-4 w-full max-w-md">
+            <Link href="/start/first-time" className="flex-1 py-3.5 px-7 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm hover:bg-[#00b894] transition-all glow flex items-center justify-center gap-2 shadow-lg shadow-[#00d4aa]/10">
               🎵 I&apos;m starting fresh
             </Link>
-            <Link href="/start/experienced" className="flex-1 h-12 px-6 rounded-xl border border-[#2e2e2e] text-white font-semibold text-sm hover:border-[#00d4aa]/40 transition-all flex items-center justify-center gap-2">
+            <Link href="/start/experienced" className="flex-1 py-3.5 px-7 rounded-xl border border-[#2a2a2a] bg-[#0e0e0e] text-white font-semibold text-sm hover:border-[#00d4aa]/30 hover:bg-[#111] transition-all flex items-center justify-center gap-2">
               ⚡ I&apos;ve registered before
             </Link>
           </div>
 
           <p className="text-[#555] text-sm">Free · No credit card · Works for human-made and AI-assisted music</p>
+
+          {/* Stats bar */}
+          <div className="flex items-center gap-6 pt-2 flex-wrap justify-center">
+            {[
+              { val: "9", label: "royalty channels checked" },
+              { val: "60 sec", label: "to your full roadmap" },
+              { val: "Free", label: "forever, no card needed" },
+            ].map((s) => (
+              <div key={s.label} className="flex items-center gap-2 text-sm">
+                <span className="text-[#00d4aa] font-black">{s.val}</span>
+                <span className="text-[#555]">{s.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Dashboard preview */}
@@ -337,10 +352,10 @@ export default function HomePage() {
             MusicRight helps you see the gaps and close them — step by step.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/start/first-time" className="h-14 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow">
+            <Link href="/start/first-time" className="py-4 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow shadow-xl shadow-[#00d4aa]/10">
               🎵 Check My Song Free →
             </Link>
-            <Link href="/start/experienced" className="h-14 px-8 rounded-xl border border-[#2e2e2e] text-white font-semibold text-base hover:border-[#00d4aa]/40 transition-all">
+            <Link href="/start/experienced" className="py-4 px-8 rounded-xl border border-[#2a2a2a] bg-[#0e0e0e] text-white font-semibold text-base hover:border-[#00d4aa]/30 hover:bg-[#111] transition-all">
               ⚡ I&apos;ve Registered Before
             </Link>
           </div>
@@ -384,8 +399,9 @@ export default function HomePage() {
             <div>
               <div className="text-white font-semibold mb-3">Company</div>
               <div className="flex flex-col gap-2 text-[#555]">
-                <span>musicright.ai</span>
-                <span className="text-[#00d4aa] text-xs">contact@musicright.ai</span>
+                <a href="mailto:contact@musicright.ai" className="hover:text-[#a0a0a0] transition-colors">Contact</a>
+                <Link href="/legal/terms" className="hover:text-[#a0a0a0] transition-colors">Terms</Link>
+                <Link href="/legal/privacy" className="hover:text-[#a0a0a0] transition-colors">Privacy</Link>
               </div>
             </div>
           </div>
@@ -393,8 +409,8 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-[#111] flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#555]">
           <span>© 2026 MusicRight.AI — All rights reserved</span>
           <div className="flex gap-4">
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#00d4aa]" />Stripe secured</span>
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#00d4aa]" />SOC 2 compliant</span>
+            <Link href="/legal/privacy" className="hover:text-[#a0a0a0] transition-colors">Privacy</Link>
+            <Link href="/legal/terms" className="hover:text-[#a0a0a0] transition-colors">Terms</Link>
           </div>
         </div>
       </footer>

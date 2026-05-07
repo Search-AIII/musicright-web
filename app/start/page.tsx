@@ -1,11 +1,18 @@
 import Link from "next/link";
 
+export const metadata = { title: "Start Your Song Check" };
+
 export default function StartPage() {
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col items-center justify-center px-6 py-12">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 mb-14">
-        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00d4aa] to-[#00b4d8]" />
+        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00d4aa] to-[#00b4d8] flex items-center justify-center">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <circle cx="6" cy="6" r="4.5" stroke="#080808" strokeWidth="1.5" />
+            <circle cx="6" cy="6" r="2" fill="#080808" />
+          </svg>
+        </div>
         <span className="font-bold text-[15px]">MusicRight<span className="text-[#00d4aa]">.AI</span></span>
       </Link>
 
