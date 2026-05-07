@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { normalizeIntake } from "../../../lib/normalize";
 import { diagnose } from "../../../lib/diagnosis";
 import { getSupabaseAdmin } from "../../../lib/supabase";
+import { createClient } from "../../../lib/supabase-server";
 import type { SongIntake, DiagnosisResult } from "../../../lib/types";
 
 export const runtime = "nodejs";
@@ -27,8 +28,16 @@ export async function POST(req: NextRequest) {
   // Build the enriched output (architecture v1 DiagnosisOutput shape)
   const output = buildDiagnosisOutput(intake, diagnosis);
 
+  // Get current user id if authenticated (non-blocking)
+  let userId: string | null = null;
+  try {
+    const serverClient = await createClient();
+    const { data: { user } } = await serverClient.auth.getUser();
+    userId = user?.id ?? null;
+  } catch {}
+
   // Persist to Supabase (non-blocking — failure doesn't break response)
-  const submissionId = await persistSubmission(intake, diagnosis, output);
+  const submissionId = await persistSubmission(intake, diagnosis, output, userId);
 
   return NextResponse.json({
     success: true,
@@ -123,6 +132,7 @@ async function persistSubmission(
   intake: SongIntake,
   diagnosis: DiagnosisResult,
   output: ReturnType<typeof buildDiagnosisOutput>,
+  userId: string | null,
 ): Promise<string | null> {
   try {
     const db = getSupabaseAdmin();
@@ -131,13 +141,13 @@ async function persistSubmission(
     const { data, error } = await db
       .from("mvp_song_submissions")
       .insert({
+        user_id: userId,
         user_type: intake.userType,
         email: intake.email,
         artist_name: intake.artistName,
         song_title: intake.songTitle,
         release_status: intake.releaseStatus,
         raw_input_json: intake,
-        normalized_input_json: intake,
         diagnosis_json: output,
         source: "web",
       })
