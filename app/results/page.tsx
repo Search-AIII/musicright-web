@@ -80,6 +80,9 @@ function ResultsContent() {
   const sp = useSearchParams();
   const [intake, setIntake] = useState<SongIntake | null>(null);
   const [result, setResult] = useState<DiagnosisResult | null>(null);
+  const [leadEmail, setLeadEmail] = useState("");
+  const [leadSent, setLeadSent] = useState(false);
+  const [leadLoading, setLeadLoading] = useState(false);
 
   useEffect(() => {
     let parsed: SongIntake | null = null;
@@ -277,17 +280,64 @@ function ResultsContent() {
           </div>
         )}
 
-        {/* ── MODULE 6: MusicRight Assist Layer ── */}
-        <div className="rounded-2xl border border-[#00d4aa]/20 bg-[#00d4aa]/5 p-6 mb-8">
-          <div className="text-[#00d4aa] text-xs font-bold uppercase tracking-[0.15em] mb-2">MusicRight Assist</div>
-          <h2 className="text-lg font-black mb-2">Want us to handle this for you?</h2>
+        {/* ── MODULE 6: Save Results + Lead Capture ── */}
+        <div className="rounded-2xl border border-[#00d4aa]/20 bg-[#00d4aa]/5 p-6 mb-6">
+          <div className="text-[#00d4aa] text-xs font-bold uppercase tracking-[0.15em] mb-2">Save Your Results</div>
+          <h2 className="text-lg font-black mb-1">
+            You have {actionPlan.filter(a => a.priority === "high").length} high-priority gaps.
+          </h2>
           <p className="text-[#a0a0a0] text-sm leading-relaxed mb-4">
-            Based on your review, you have {actionPlan.filter(a => a.priority === "high").length} high-priority items
-            that may affect royalty collection. MusicRight can help process registrations, fix metadata,
-            and activate collection channels — so you can focus on making music.
+            Enter your email to save this report and get notified when MusicRight can help process your setup.
           </p>
-          <p className="text-[#555] text-xs">
-            Results may vary based on catalog and registration history. We don&apos;t guarantee specific earnings.
+          {leadSent ? (
+            <div className="flex items-center gap-3 bg-[#00d4aa]/10 border border-[#00d4aa]/30 rounded-xl px-4 py-3">
+              <span className="text-[#00d4aa] text-lg">✓</span>
+              <div>
+                <div className="text-[#00d4aa] text-sm font-bold">Saved! We&apos;ll be in touch.</div>
+                <div className="text-[#555] text-xs">Check your inbox for your royalty report.</div>
+              </div>
+            </div>
+          ) : (
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setLeadLoading(true);
+                await fetch("/api/waitlist", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    email: leadEmail,
+                    artistName: intake?.artistName,
+                    songTitle: intake?.songTitle,
+                    userType: intake?.userType,
+                    wantsHelp: true,
+                    source: "results_page",
+                  }),
+                });
+                setLeadSent(true);
+                setLeadLoading(false);
+              }}
+              className="flex gap-2"
+            >
+              <input
+                type="email"
+                required
+                placeholder="your@email.com"
+                value={leadEmail}
+                onChange={e => setLeadEmail(e.target.value)}
+                className="flex-1 h-11 rounded-xl bg-[#080808] border border-[#2e2e2e] px-4 text-white text-sm placeholder-[#555] focus:outline-none focus:border-[#00d4aa]/50 transition-colors"
+              />
+              <button
+                type="submit"
+                disabled={leadLoading}
+                className="h-11 px-5 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm hover:bg-[#00b894] transition-colors disabled:opacity-50 whitespace-nowrap"
+              >
+                {leadLoading ? "…" : "Save Results →"}
+              </button>
+            </form>
+          )}
+          <p className="text-[#555] text-xs mt-3">
+            Free · No credit card · Results may vary based on catalog and registration history.
           </p>
         </div>
 
@@ -302,8 +352,8 @@ function ResultsContent() {
               PRO, MLC, SoundExchange registration + ISRC + splits documentation.
               We process the setup; you keep control.
             </p>
-            <Link href="/start" className="h-11 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm flex items-center justify-center hover:bg-[#00b894] transition-colors">
-              Set Up My Royalties →
+            <Link href="/auth/login?plan=setup" className="h-11 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm flex items-center justify-center hover:bg-[#00b894] transition-colors">
+              Get Royalty Setup — $49 →
             </Link>
           </div>
           <div className="rounded-2xl border border-[#1a1a1a] bg-[#0e0e0e] p-6 flex flex-col">
@@ -317,8 +367,8 @@ function ResultsContent() {
             <p className="text-[#555] text-xs mb-4 leading-relaxed flex-1">
               We handle everything: all channels, YouTube Content ID, social media monetization, and global setup.
             </p>
-            <Link href="/start" className="h-11 rounded-xl border border-[#00d4aa]/40 text-[#00d4aa] font-bold text-sm flex items-center justify-center hover:bg-[#00d4aa]/10 transition-colors">
-              Get Done For You →
+            <Link href="/auth/login?plan=dfy" className="h-11 rounded-xl border border-[#00d4aa]/40 text-[#00d4aa] font-bold text-sm flex items-center justify-center hover:bg-[#00d4aa]/10 transition-colors">
+              Get Done For You — $149 →
             </Link>
           </div>
         </div>
