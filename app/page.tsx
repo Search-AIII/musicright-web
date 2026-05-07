@@ -207,6 +207,43 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── FREE TOOLS ── */}
+      <section className="py-24 px-6 border-t border-[#111]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <div className="text-[#00d4aa] text-xs font-bold uppercase tracking-[0.2em] mb-3">Free Tools</div>
+              <h2 className="text-3xl md:text-4xl font-black tracking-tight">
+                Everything you need<br />to run your music business.
+              </h2>
+            </div>
+            <Link href="/tools" className="text-[#00d4aa] text-sm font-semibold hover:underline whitespace-nowrap">
+              View all tools →
+            </Link>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: "📋", title: "Release Checklist", desc: "Set your release date. Get every deadline back-calculated automatically.", href: "/tools/release-checklist" },
+              { icon: "✍️", title: "Split Sheet Generator", desc: "Document songwriter splits. Download a signed PDF before you leave the session.", href: "/tools/split-sheet" },
+              { icon: "🧾", title: "Artist Invoice", desc: "Music-native invoicing for session fees, beat licenses, sync deals, and producer points.", href: "/tools/artist-invoice" },
+              { icon: "©️", title: "Song Copyright Guide", desc: "Understand what you own automatically vs. what formal registration actually gets you.", href: "/tools/song-copyright" },
+            ].map((t) => (
+              <Link key={t.title} href={t.href}
+                className="rounded-2xl border border-[#1a1a1a] bg-[#0e0e0e] p-5 hover:border-[#00d4aa]/20 transition-colors group flex flex-col gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#1a1a1a] flex items-center justify-center text-xl group-hover:bg-[#00d4aa]/10 transition-colors">
+                  {t.icon}
+                </div>
+                <div>
+                  <div className="text-white font-bold text-sm mb-1 group-hover:text-[#00d4aa] transition-colors">{t.title}</div>
+                  <div className="text-[#555] text-xs leading-relaxed">{t.desc}</div>
+                </div>
+                <div className="text-[#00d4aa] text-xs font-semibold mt-auto">Open free tool →</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── ROYALTY EARNING OPPORTUNITIES ── */}
       <section id="channels" className="py-24 px-6 border-t border-[#111]">
         <div className="max-w-6xl mx-auto">
