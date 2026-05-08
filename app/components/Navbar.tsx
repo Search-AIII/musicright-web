@@ -23,9 +23,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00d4aa] to-[#00b4d8] flex items-center justify-center">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <circle cx="7" cy="7" r="3" fill="#fff" />
-              <circle cx="7" cy="7" r="6" stroke="#fff" strokeWidth="1.5" />
-              <path d="M4 7h6M7 4v6" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M10 2v7.5C10 10.9 8.8 12 7.2 12c-1.7 0-2.9-1-2.9-2.3C4.3 8.4 5.5 7.5 7.2 7.5c.6 0 1.1.1 1.8.4V2H10z" fill="#fff"/>
             </svg>
           </div>
           <span className="font-bold text-[15px] tracking-tight text-[#0a0a0a]">MusicRight<span className="text-[#00d4aa]">.AI</span></span>
