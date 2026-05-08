@@ -72,19 +72,21 @@ create policy "anyone can join waitlist" on mvp_waitlist
   for insert with check (true);
 
 -- ── Orders ────────────────────────────────────────────────────────────────────
--- Tracks Setup ($49) and Done-For-You ($149) orders.
+-- Tracks Early Access ($5), Setup ($49), and Done-For-You ($149) orders.
 create table if not exists orders (
-  id              uuid primary key default gen_random_uuid(),
-  created_at      timestamptz not null default now(),
-  user_id         uuid references auth.users(id) on delete set null,
-  submission_id   uuid references mvp_song_submissions(id) on delete set null,
-  email           text not null,
-  artist_name     text,
-  song_title      text,
-  plan            text not null check (plan in ('setup', 'dfy')),
-  status          text not null default 'pending' check (status in ('pending', 'in_progress', 'completed', 'cancelled')),
-  amount_cents    integer not null,
-  notes           text
+  id                  text primary key,  -- Stripe session ID or UUID
+  created_at          timestamptz not null default now(),
+  user_id             uuid references auth.users(id) on delete set null,
+  submission_id       uuid references mvp_song_submissions(id) on delete set null,
+  customer_email      text,
+  email               text,
+  artist_name         text,
+  song_title          text,
+  plan                text not null check (plan in ('early_access', 'setup', 'dfy')),
+  status              text not null default 'pending' check (status in ('pending', 'paid', 'in_progress', 'completed', 'cancelled')),
+  amount_cents        integer not null,
+  stripe_session_id   text,
+  notes               text
 );
 
 create index if not exists idx_orders_user_id on orders(user_id);

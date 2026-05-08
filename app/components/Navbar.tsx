@@ -65,6 +65,9 @@ export default function Navbar() {
               <Link href="/auth/login" className="text-sm text-[#a0a0a0] hover:text-white transition-colors">
                 Sign in
               </Link>
+              <Link href="/early-access" className="h-9 px-4 rounded-lg border border-[#a78bfa]/30 bg-[#a78bfa]/5 text-[#a78bfa] text-sm font-semibold hover:bg-[#a78bfa]/10 transition-colors">
+                $5 Early Access
+              </Link>
               <Link href="/start/first-time" className="h-9 px-4 rounded-lg bg-[#00d4aa] text-[#080808] text-sm font-semibold hover:bg-[#00b894] transition-colors">
                 Check My Song →
               </Link>
