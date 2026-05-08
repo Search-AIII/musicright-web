@@ -47,25 +47,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080808] flex flex-col items-center justify-center px-6">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-6">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2.5 mb-10">
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4aa] to-[#00b4d8] flex items-center justify-center">
           <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
-            <circle cx="7" cy="7" r="3" fill="#080808" />
-            <circle cx="7" cy="7" r="6" stroke="#080808" strokeWidth="1.5" />
-            <path d="M4 7h6M7 4v6" stroke="#080808" strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="7" cy="7" r="3" fill="#fff" />
+            <circle cx="7" cy="7" r="6" stroke="#fff" strokeWidth="1.5" />
+            <path d="M4 7h6M7 4v6" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </div>
-        <span className="font-bold text-base tracking-tight text-white">MusicRight<span className="text-[#00d4aa]">.AI</span></span>
+        <span className="font-bold text-base tracking-tight text-[#0a0a0a]">MusicRight<span className="text-[#00d4aa]">.AI</span></span>
       </Link>
 
       <div className="w-full max-w-sm">
-        <div className="rounded-2xl border border-[#1a1a1a] bg-[#0e0e0e] p-8">
-          <h1 className="text-xl font-black text-white mb-1">
+        <div className="rounded-2xl border border-[#e8e8e8] bg-white p-8 shadow-sm">
+          <h1 className="text-xl font-black text-[#0a0a0a] mb-1">
             {mode === "signin" ? "Welcome back" : "Create your account"}
           </h1>
-          <p className="text-[#555] text-sm mb-6">
+          <p className="text-[#888] text-sm mb-6">
             {mode === "signin" ? "Sign in to your MusicRight account." : "Start your free royalty check."}
           </p>
 
@@ -73,7 +73,7 @@ export default function LoginPage() {
           <button
             onClick={handleGoogle}
             disabled={loading}
-            className="w-full h-11 rounded-xl border border-[#2e2e2e] text-white font-semibold text-sm flex items-center justify-center gap-3 hover:border-[#00d4aa]/40 hover:bg-white/5 transition-all disabled:opacity-40 disabled:cursor-not-allowed mb-4"
+            className="w-full h-11 rounded-xl border border-[#e0e0e0] text-[#0a0a0a] font-semibold text-sm flex items-center justify-center gap-3 hover:border-[#00d4aa] hover:bg-[#fafafa] transition-all disabled:opacity-40 disabled:cursor-not-allowed mb-4"
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
@@ -85,9 +85,9 @@ export default function LoginPage() {
           </button>
 
           <div className="flex items-center gap-3 mb-4">
-            <div className="flex-1 h-px bg-[#1a1a1a]" />
-            <span className="text-[#555] text-xs">or</span>
-            <div className="flex-1 h-px bg-[#1a1a1a]" />
+            <div className="flex-1 h-px bg-[#f0f0f0]" />
+            <span className="text-[#bbb] text-xs">or</span>
+            <div className="flex-1 h-px bg-[#f0f0f0]" />
           </div>
 
           {/* Email form */}
@@ -98,7 +98,7 @@ export default function LoginPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="h-11 rounded-lg bg-[#111] border border-[#2e2e2e] px-4 text-white text-sm placeholder-[#555] focus:outline-none focus:border-[#00d4aa]/50 transition-colors"
+              className="h-11 rounded-lg bg-[#fafafa] border border-[#e8e8e8] px-4 text-[#0a0a0a] text-sm placeholder-[#bbb] focus:outline-none focus:border-[#00d4aa] transition-colors"
             />
             <input
               type="password"
@@ -107,11 +107,11 @@ export default function LoginPage() {
               onChange={e => setPassword(e.target.value)}
               required
               minLength={6}
-              className="h-11 rounded-lg bg-[#111] border border-[#2e2e2e] px-4 text-white text-sm placeholder-[#555] focus:outline-none focus:border-[#00d4aa]/50 transition-colors"
+              className="h-11 rounded-lg bg-[#fafafa] border border-[#e8e8e8] px-4 text-[#0a0a0a] text-sm placeholder-[#bbb] focus:outline-none focus:border-[#00d4aa] transition-colors"
             />
 
             {message && (
-              <div className={`text-xs px-3 py-2 rounded-lg ${message.type === "error" ? "text-[#ff4757] bg-[#ff4757]/10" : "text-[#00d4aa] bg-[#00d4aa]/10"}`}>
+              <div className={`text-xs px-3 py-2 rounded-lg ${message.type === "error" ? "text-red-600 bg-red-50" : "text-[#00b894] bg-[#00d4aa]/10"}`}>
                 {message.text}
               </div>
             )}
@@ -119,13 +119,13 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="h-11 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-sm hover:bg-[#00b894] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              className="h-11 rounded-xl bg-[#00d4aa] text-white font-bold text-sm hover:bg-[#00b894] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {loading ? "Please wait…" : mode === "signin" ? "Sign In" : "Create Account"}
             </button>
           </form>
 
-          <div className="flex items-center justify-between mt-5 text-xs text-[#555]">
+          <div className="flex items-center justify-between mt-5 text-xs text-[#999]">
             {mode === "signin" ? (
               <>
                 <span>No account?{" "}
@@ -145,7 +145,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-center text-[#333] text-xs mt-6">
+        <p className="text-center text-[#bbb] text-xs mt-6">
           By continuing you agree to our{" "}
           <Link href="/legal/terms" className="hover:text-[#555]">Terms</Link>
           {" "}and{" "}
