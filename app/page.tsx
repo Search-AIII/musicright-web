@@ -1,430 +1,378 @@
-import Navbar from "./components/Navbar";
 import Link from "next/link";
-
-// ─── Mock data for catalog preview ────────────────────────────────────────────
-const PREVIEW_SONGS = [
-  { title: "So Hot (feat. KTTeddy)", isrc: "US-XXX-26-001", ascap: true,  bmi: false, mlc: true,  se: false, leak: "$340/mo" },
-  { title: "Midnight Drive",         isrc: "US-XXX-25-042", ascap: true,  bmi: true,  mlc: false, se: true,  leak: "$180/mo" },
-  { title: "Golden Hour",            isrc: null,            ascap: false, bmi: false, mlc: false, se: false, leak: "$520/mo" },
-  { title: "City Lights",            isrc: "US-XXX-24-088", ascap: true,  bmi: true,  mlc: true,  se: true,  leak: null },
-];
-
-const LEAKS = [
-  { sev: "critical", label: "MLC Not Registered",       detail: "3 songs not collecting mechanical royalties",  amount: "$4,080/yr",  color: "#ff4757" },
-  { sev: "high",     label: "SoundExchange Unlinked",    detail: "Digital radio royalties going uncollected",    amount: "$2,160/yr",  color: "#ffb800" },
-  { sev: "high",     label: "Publisher Share Unclaimed", detail: "50% publisher split not assigned on 2 songs",  amount: "$1,320/yr",  color: "#ffb800" },
-  { sev: "medium",   label: "Missing ISRC Code",         detail: '"Golden Hour" blocked from 4 DSPs',           amount: "Blocked",    color: "#ff6b35" },
-];
-
-const FEATURES = [
-  {
-    icon: "🔍",
-    title: "Rights Audit",
-    desc: "4-step intake scans your catalog against ASCAP, BMI, The MLC, SoundExchange and 40+ global PROs. See every gap in seconds.",
-  },
-  {
-    icon: "💰",
-    title: "Revenue Leak Alerts",
-    desc: "Real-time cards showing exactly how much money you're missing and from which organization — with a one-tap fix.",
-  },
-  {
-    icon: "🏦",
-    title: "Royalty Wallet",
-    desc: "See all your royalty income in one place. Instant Stripe-powered payouts to your bank account. No more waiting 6–18 months.",
-  },
-  {
-    icon: "⚡",
-    title: "Fix Actions",
-    desc: "Prioritized action list. We handle the registrations for you — ASCAP, BMI, The MLC, SoundExchange, Harry Fox Agency.",
-  },
-  {
-    icon: "🛡️",
-    title: "DMCA Generator",
-    desc: "One-click DMCA takedown notices for YouTube, TikTok, Instagram, Spotify and Twitter. Filed properly, every time.",
-  },
-  {
-    icon: "🤖",
-    title: "AI Rights Advisor",
-    desc: "Ask anything about royalties, licensing, splits, and international collection. Powered by DeepSeek V3 and Qwen 2.5.",
-  },
-];
-
-const STEPS = [
-  { n: "01", title: "Run your free audit", desc: "Enter your artist name. We scan all major PROs and identify every registration gap in your catalog." },
-  { n: "02", title: "See your revenue leaks", desc: "Get a dollar-amount breakdown of exactly what you're missing and why — per song, per organization." },
-  { n: "03", title: "We fix it for you", desc: "One payment. We handle every registration: ASCAP, BMI, MLC, SoundExchange, ISRC, and more." },
-  { n: "04", title: "Collect your money", desc: "Royalties flow into your MusicRight wallet. Instant payout to your bank — no 6-month delays." },
-];
-
-const PRICING = [
-  {
-    name: "Audit",
-    price: "Free",
-    sub: "Always free",
-    features: ["Full rights audit", "Revenue leak report", "Gap breakdown by PRO", "Priority action list"],
-    cta: "Run free audit",
-    href: "/audit",
-    highlight: false,
-  },
-  {
-    name: "Pro",
-    price: "$29",
-    sub: "per month",
-    features: ["Everything in Audit", "Rights Wallet + payouts", "DMCA generator", "AI advisor", "Certificate sharing", "40+ country coverage"],
-    cta: "Start Pro",
-    href: "/audit",
-    highlight: true,
-  },
-  {
-    name: "Recovery",
-    price: "$149",
-    sub: "one-time",
-    features: ["Everything in Pro", "We register all missing PROs", "ISRC generation", "Publisher split setup", "SoundExchange linking", "Dedicated support"],
-    cta: "Book recovery",
-    href: "/audit",
-    highlight: false,
-  },
-];
-
-function Dot({ on }: { on: boolean }) {
-  return (
-    <div
-      className={`w-2 h-2 rounded-full ${on ? "bg-[#00d4aa]" : "bg-[#ff4757]/40 border border-[#ff4757]/60"}`}
-    />
-  );
-}
+import Navbar from "./components/Navbar";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#080808] text-white">
+    <div className="min-h-screen bg-white text-[#0a0a0a]">
       <Navbar />
 
-      {/* ── HERO ──────────────────────────────────────────────────────────────── */}
-      <section className="pt-32 pb-20 px-6 max-w-6xl mx-auto">
-        <div className="flex flex-col items-center text-center gap-6">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#00d4aa]/20 bg-[#00d4aa]/5 text-[#00d4aa] text-xs font-semibold tracking-wide">
+      {/* ── HERO ── */}
+      <section className="pt-40 pb-28 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#00d4aa]/30 bg-[#00d4aa]/6 text-[#009d7f] text-xs font-semibold tracking-wide mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00d4aa] animate-pulse" />
-            ROYALTY OPERATIONS FOR INDEPENDENT ARTISTS
+            Royalty OS for independent artists
           </div>
 
-          {/* Headline */}
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.05] max-w-4xl">
-            Find every dollar
-            <br />
-            <span className="gradient-text">you&apos;re not collecting.</span>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.04] text-[#0a0a0a] mb-6">
+            Your music earns<br />
+            from 9 channels.<br />
+            <span className="text-[#00d4aa]">Most artists miss 6.</span>
           </h1>
 
-          {/* Sub */}
-          <p className="text-[#a0a0a0] text-lg md:text-xl max-w-2xl leading-relaxed">
-            MusicRight audits your catalog against every major PRO, identifies broken registrations,
-            and fixes them — so you collect 100% of what you&apos;ve earned.
+          <p className="text-[#666] text-xl max-w-2xl mx-auto leading-relaxed mb-10">
+            MusicRight checks every royalty channel your song can earn from —
+            then helps you close the gaps that are costing you money.
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-            <Link
-              href="/audit"
-              className="h-12 px-6 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-base hover:bg-[#00b894] transition-all glow"
-            >
-              Run free audit →
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/start"
+              className="h-14 px-8 rounded-2xl bg-[#0a0a0a] text-white font-bold text-base flex items-center justify-center gap-2 hover:bg-[#222] transition-all">
+              Check your song free →
             </Link>
-            <Link
-              href="/dashboard"
-              className="h-12 px-6 rounded-xl border border-[#2e2e2e] text-[#a0a0a0] font-semibold text-base hover:border-[#00d4aa]/40 hover:text-white transition-all"
-            >
-              View dashboard demo
+            <Link href="/early-access"
+              className="h-14 px-8 rounded-2xl border-2 border-[#00d4aa] text-[#00d4aa] font-bold text-base flex items-center justify-center gap-2 hover:bg-[#00d4aa]/5 transition-all">
+              $5 Early Access
             </Link>
           </div>
 
-          {/* Social proof */}
-          <p className="text-[#555] text-sm">
-            Free audit · No credit card required · Results in 60 seconds
-          </p>
-        </div>
-
-        {/* ── Dashboard preview ── */}
-        <div className="mt-16 rounded-2xl border border-[#222] bg-[#111] overflow-hidden shadow-2xl">
-          {/* Window chrome */}
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-[#222] bg-[#0d0d0d]">
-            <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-            <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-            <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-            <div className="flex-1 mx-4 h-6 rounded-md bg-[#1a1a1a] flex items-center px-3">
-              <span className="text-[#555] text-xs">musicright.ai/dashboard</span>
-            </div>
-          </div>
-
-          {/* Audit score bar */}
-          <div className="flex items-center gap-4 px-6 py-4 border-b border-[#1a1a1a] bg-[#0e0e0e]">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border-2 border-[#ffb800] flex items-center justify-center">
-                <span className="text-[#ffb800] text-sm font-black">68</span>
-              </div>
-              <div>
-                <div className="text-xs text-[#555] uppercase tracking-wider font-semibold">Rights Score</div>
-                <div className="text-[#ffb800] text-xs font-semibold">Needs Attention</div>
-              </div>
-            </div>
-            <div className="h-8 w-px bg-[#222]" />
-            <div className="flex gap-6">
-              {[
-                { label: "Annual Leak", val: "$8,640", color: "#ff4757" },
-                { label: "Songs Tracked", val: "5", color: "#a0a0a0" },
-                { label: "Active PROs", val: "2 / 4", color: "#ffb800" },
-              ].map((m) => (
-                <div key={m.label}>
-                  <div className="text-xs text-[#555] font-medium">{m.label}</div>
-                  <div className="font-bold text-sm" style={{ color: m.color }}>{m.val}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Leak cards */}
-          <div className="flex gap-3 p-4 overflow-x-auto">
-            {LEAKS.map((l) => (
-              <div
-                key={l.label}
-                className="flex-shrink-0 w-56 rounded-xl p-3.5 border bg-[#0d0d0d]"
-                style={{ borderColor: l.color + "30" }}
-              >
-                <div
-                  className="text-[10px] font-bold uppercase tracking-wider mb-1"
-                  style={{ color: l.color }}
-                >
-                  {l.sev}
-                </div>
-                <div className="text-white text-sm font-semibold mb-0.5">{l.label}</div>
-                <div className="text-[#555] text-xs mb-2">{l.detail}</div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold" style={{ color: l.color }}>{l.amount}</span>
-                  <button
-                    className="text-[10px] font-bold px-2 py-1 rounded-md"
-                    style={{ background: l.color + "15", color: l.color }}
-                  >
-                    Fix →
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Catalog table */}
-          <div className="border-t border-[#1a1a1a]">
-            <div className="px-4 py-2 border-b border-[#1a1a1a] bg-[#0d0d0d]">
-              <span className="text-[#555] text-xs font-semibold uppercase tracking-wider">Song Catalog</span>
-            </div>
-            {/* Table header */}
-            <div className="grid grid-cols-[1fr_100px_40px_40px_40px_40px_80px] gap-2 px-4 py-2 bg-[#0d0d0d] border-b border-[#1a1a1a]">
-              {["SONG", "ISRC", "ASCAP", "BMI", "MLC", "SE", "LEAK"].map((h) => (
-                <div key={h} className="text-[#555] text-[10px] font-bold uppercase tracking-wider">{h}</div>
-              ))}
-            </div>
-            {PREVIEW_SONGS.map((s, i) => (
-              <div
-                key={i}
-                className="grid grid-cols-[1fr_100px_40px_40px_40px_40px_80px] gap-2 px-4 py-2.5 border-b border-[#1a1a1a] hover:bg-[#0d0d0d] transition-colors"
-              >
-                <div className="text-white text-xs font-medium truncate">{s.title}</div>
-                <div className="text-[#555] text-[11px] font-mono">{s.isrc ?? "—"}</div>
-                <Dot on={s.ascap} />
-                <Dot on={s.bmi} />
-                <Dot on={s.mlc} />
-                <Dot on={s.se} />
-                <div className={`text-[11px] font-bold ${s.leak ? "text-[#ff4757]" : "text-[#00d4aa]"}`}>
-                  {s.leak ?? "✓ Full"}
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="text-[#bbb] text-sm mt-5">Free song check · No credit card required · 2 minutes</p>
         </div>
       </section>
 
-      {/* ── FEATURES ──────────────────────────────────────────────────────────── */}
-      <section id="features" className="py-24 px-6 border-t border-[#111]">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-[#00d4aa] text-xs font-bold uppercase tracking-[0.2em] mb-3">Features</div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight">
-              Everything you need to collect
-              <br />
-              <span className="gradient-text">every dollar you&apos;ve earned</span>
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            {FEATURES.map((f) => (
-              <div
-                key={f.title}
-                className="rounded-2xl p-6 border border-[#1a1a1a] bg-[#0e0e0e] hover:border-[#00d4aa]/20 transition-colors group"
-              >
-                <div className="text-2xl mb-4">{f.icon}</div>
-                <h3 className="text-white font-bold text-base mb-2 group-hover:text-[#00d4aa] transition-colors">
-                  {f.title}
-                </h3>
-                <p className="text-[#a0a0a0] text-sm leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── DIVIDER ── */}
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="border-t border-[#f0f0f0]" />
+      </div>
 
-      {/* ── HOW IT WORKS ──────────────────────────────────────────────────────── */}
-      <section id="how-it-works" className="py-24 px-6 border-t border-[#111]">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-[#00d4aa] text-xs font-bold uppercase tracking-[0.2em] mb-3">How it works</div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight">
-              From audit to payout
-              <br />
-              <span className="gradient-text">in 4 steps</span>
+      {/* ── FEATURE 1: text left, dark mockup right ── */}
+      <section className="py-28 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="w-11 h-11 rounded-2xl bg-[#00d4aa]/10 flex items-center justify-center text-2xl mb-6">🔍</div>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.1] mb-5">
+              Check every<br />royalty channel.
             </h2>
-          </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {STEPS.map((s) => (
-              <div key={s.n} className="relative">
-                <div className="text-4xl font-black text-[#1a1a1a] mb-4">{s.n}</div>
-                <h3 className="text-white font-bold text-base mb-2">{s.title}</h3>
-                <p className="text-[#a0a0a0] text-sm leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PRICING ───────────────────────────────────────────────────────────── */}
-      <section id="pricing" className="py-24 px-6 border-t border-[#111]">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-[#00d4aa] text-xs font-bold uppercase tracking-[0.2em] mb-3">Pricing</div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight">
-              Start free.
-              <span className="gradient-text"> Pay when it works.</span>
-            </h2>
-            <p className="text-[#a0a0a0] mt-4 text-base">
-              Run a full audit for free. Upgrade only if we find missing money.
+            <p className="text-[#666] text-lg leading-relaxed mb-4">
+              Enter one song. MusicRight scans all 9 royalty channels — streaming, PRO, mechanicals,
+              digital radio, Content ID, and copyright — and shows you exactly what's missing.
+            </p>
+            <p className="text-[#999] text-sm italic">
+              Most artists are registered in 2 of 9 channels. That's revenue left uncollected.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {PRICING.map((p) => (
-              <div
-                key={p.name}
-                className={`rounded-2xl p-6 border flex flex-col ${
-                  p.highlight
-                    ? "border-[#00d4aa]/40 bg-[#00d4aa]/5 glow"
-                    : "border-[#1a1a1a] bg-[#0e0e0e]"
-                }`}
-              >
-                {p.highlight && (
-                  <div className="text-[#00d4aa] text-[10px] font-bold uppercase tracking-[0.15em] mb-3">
-                    Most Popular
-                  </div>
-                )}
-                <div className="text-[#a0a0a0] text-sm font-semibold mb-1">{p.name}</div>
-                <div className="flex items-end gap-1 mb-1">
-                  <span className="text-3xl font-black text-white">{p.price}</span>
-                  {p.price !== "Free" && <span className="text-[#555] text-sm mb-1">{p.sub}</span>}
+
+          {/* Dark mockup card */}
+          <div className="rounded-3xl bg-[#0f0f0f] p-6 shadow-2xl shadow-black/20">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+              <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+              <span className="text-[#444] text-xs ml-2 font-mono">Song Check</span>
+            </div>
+            <div className="space-y-3">
+              <div>
+                <div className="text-[#555] text-xs mb-1 font-mono">SONG TITLE</div>
+                <div className="bg-[#1a1a1a] rounded-xl px-4 py-3 text-white text-sm font-medium">Midnight Drive</div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <div className="text-[#555] text-xs mb-1 font-mono">ARTIST</div>
+                  <div className="bg-[#1a1a1a] rounded-xl px-4 py-3 text-white text-sm">Jordan Lee</div>
                 </div>
-                <div className="text-[#555] text-xs mb-5">{p.price === "Free" ? p.sub : ""}</div>
-                <ul className="flex flex-col gap-2.5 mb-6 flex-1">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-[#a0a0a0]">
-                      <span className="text-[#00d4aa] text-xs">✓</span>
-                      {f}
+                <div>
+                  <div className="text-[#555] text-xs mb-1 font-mono">RELEASE YEAR</div>
+                  <div className="bg-[#1a1a1a] rounded-xl px-4 py-3 text-white text-sm">2024</div>
+                </div>
+              </div>
+              <div className="bg-[#00d4aa]/10 border border-[#00d4aa]/20 rounded-xl px-4 py-3 flex items-center justify-between mt-2">
+                <span className="text-[#00d4aa] text-sm font-semibold">Run Royalty Check</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="#00d4aa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-6"><div className="border-t border-[#f0f0f0]" /></div>
+
+      {/* ── FEATURE 2: dark mockup left, text right ── */}
+      <section className="py-28 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          {/* Dark mockup card — left */}
+          <div className="rounded-3xl bg-[#0f0f0f] p-6 shadow-2xl shadow-black/20 order-2 md:order-1">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+              <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+              <span className="text-[#444] text-xs ml-2 font-mono">Royalty Health Score</span>
+            </div>
+
+            <div className="text-center mb-5">
+              <div className="text-6xl font-black text-white mb-1">42</div>
+              <div className="text-[#888] text-xs">out of 100 · Needs Work</div>
+              <div className="mt-3 h-2 rounded-full bg-[#222] overflow-hidden">
+                <div className="h-full rounded-full bg-gradient-to-r from-[#00d4aa] to-[#00b4d8]" style={{width:"42%"}} />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {[
+                { label: "Streaming + ISRC", status: "ok", note: "Connected" },
+                { label: "PRO Registration", status: "warn", note: "Not registered" },
+                { label: "MLC Mechanical", status: "bad", note: "Missing" },
+                { label: "SoundExchange", status: "bad", note: "Not set up" },
+                { label: "YouTube Content ID", status: "warn", note: "Unclaimed" },
+                { label: "Copyright Office", status: "bad", note: "No filing found" },
+              ].map(r => (
+                <div key={r.label} className="flex items-center justify-between bg-[#1a1a1a] rounded-xl px-4 py-2.5">
+                  <span className="text-white text-xs font-medium">{r.label}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-[#666]">{r.note}</span>
+                    <div className={`w-2 h-2 rounded-full ${r.status === "ok" ? "bg-[#00d4aa]" : r.status === "warn" ? "bg-[#f59e0b]" : "bg-[#ef4444]"}`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="order-1 md:order-2">
+            <div className="w-11 h-11 rounded-2xl bg-[#7c3aed]/10 flex items-center justify-center text-2xl mb-6">📊</div>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.1] mb-5">
+              See the exact<br />gaps costing you.
+            </h2>
+            <p className="text-[#666] text-lg leading-relaxed mb-4">
+              Your Royalty Health Score shows which channels are active, broken, or completely missing.
+              Red means money you can't collect. Yellow means setup is incomplete.
+            </p>
+            <p className="text-[#999] text-sm italic">
+              The average independent artist has 4 unclosed royalty gaps at the time of their first check.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-6"><div className="border-t border-[#f0f0f0]" /></div>
+
+      {/* ── FEATURE 3: text left, audio mockup right ── */}
+      <section className="py-28 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="w-11 h-11 rounded-2xl bg-[#0891b2]/10 flex items-center justify-center text-2xl mb-6">🎧</div>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.1] mb-5">
+              Listen to your<br />royalty report.
+            </h2>
+            <p className="text-[#666] text-lg leading-relaxed mb-4">
+              Turn your royalty health report into an audio briefing. MusicRight reads your
+              gap analysis aloud — so you can absorb it while you create.
+            </p>
+            <p className="text-[#999] text-sm italic">
+              Audio Overview — one tap to hear exactly what's missing and what to do next.
+            </p>
+          </div>
+
+          {/* Audio player mockup */}
+          <div className="rounded-3xl bg-[#0f0f0f] p-6 shadow-2xl shadow-black/20">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+              <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+              <span className="text-[#444] text-xs ml-2 font-mono">Audio Overview</span>
+            </div>
+
+            <div className="bg-[#1a1a1a] rounded-2xl p-5 mb-4">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00d4aa] to-[#0891b2] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M7 5l6 4-6 4V5z" fill="#fff"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-white text-sm font-semibold">Royalty Report — Midnight Drive</div>
+                  <div className="text-[#666] text-xs mt-0.5">3 min 42 sec · MusicRight AI</div>
+                </div>
+              </div>
+
+              {/* Waveform */}
+              <div className="flex items-end gap-0.5 h-10 mb-3">
+                {[3,5,8,6,9,12,10,7,11,8,5,9,13,10,8,6,11,9,7,12,8,5,9,6,10,8,4,7,11,9,6,8].map((h, i) => (
+                  <div key={i} className={`flex-1 rounded-full ${i < 10 ? "bg-[#00d4aa]" : "bg-[#333]"}`} style={{height: `${h * 3}px`}} />
+                ))}
+              </div>
+
+              <div className="flex items-center justify-between text-xs text-[#666]">
+                <span>0:58</span>
+                <span>3:42</span>
+              </div>
+            </div>
+
+            <div className="bg-[#1a1a1a] rounded-xl px-4 py-3 text-[#888] text-xs leading-relaxed italic">
+              "…your PRO registration is missing, which means performance royalties from
+              streaming and radio plays are not being collected. Here's how to fix it in under 10 minutes…"
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SOCIAL PROOF ── */}
+      <section className="py-20 px-6 bg-[#fafafa] border-y border-[#f0f0f0]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-black text-center text-[#0a0a0a] mb-12">What independent artists are saying</h2>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                quote: "I had no idea I wasn't registered with MLC. That was 3 years of mechanicals I wasn't collecting.",
+                name: "Marcus T.",
+                role: "R&B songwriter, Atlanta",
+              },
+              {
+                quote: "The health score made it click. Seeing 4 red channels next to my song was the wake-up call I needed.",
+                name: "Aria K.",
+                role: "Indie pop artist, Los Angeles",
+              },
+              {
+                quote: "The audio report is a game changer. I play it in the car and actually understand what I need to fix.",
+                name: "DJ Calen",
+                role: "Producer & beatmaker, Chicago",
+              },
+            ].map(q => (
+              <div key={q.name} className="bg-white rounded-2xl border border-[#ebebeb] p-6 hover:border-[#00d4aa]/30 hover:shadow-sm transition-all">
+                <p className="text-[#444] text-sm leading-relaxed mb-5">&ldquo;{q.quote}&rdquo;</p>
+                <div>
+                  <div className="text-[#0a0a0a] font-semibold text-sm">{q.name}</div>
+                  <div className="text-[#999] text-xs mt-0.5">{q.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRICING ── */}
+      <section id="pricing" className="py-28 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-black tracking-tight text-[#0a0a0a] mb-3">Simple pricing</h2>
+            <p className="text-[#888] text-lg">Start free. Pay only when we do the work.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                name: "Song Check",
+                price: "Free",
+                desc: "See every royalty channel that's missing or broken for your song.",
+                features: ["Royalty Health Score", "9-channel gap report", "Setup checklist"],
+                cta: "Start free check",
+                href: "/start",
+                highlight: false,
+              },
+              {
+                name: "Early Access",
+                price: "$5",
+                desc: "Reserve your spot. Applied to your first song setup when we open.",
+                features: ["Locks your early-user rate", "Applied to first setup", "Creator Wallet status"],
+                cta: "Place $5 →",
+                href: "/early-access",
+                highlight: true,
+              },
+              {
+                name: "Full Setup",
+                price: "$49",
+                desc: "We handle PRO, MLC, SoundExchange, ISRC, splits, and copyright.",
+                features: ["All 9 channels handled", "PRO + MLC + SoundExchange", "72-hour turnaround"],
+                cta: "Learn more",
+                href: "/early-access",
+                highlight: false,
+              },
+            ].map(p => (
+              <div key={p.name} className={`rounded-2xl p-7 border flex flex-col ${
+                p.highlight
+                  ? "border-[#00d4aa] shadow-lg shadow-[#00d4aa]/10 bg-white"
+                  : "border-[#e8e8e8] bg-white hover:border-[#d0d0d0]"
+              } transition-all`}>
+                {p.highlight && (
+                  <div className="text-[#00b894] text-[10px] font-bold uppercase tracking-wider mb-3">Most Popular</div>
+                )}
+                <div className="text-[#999] text-xs font-semibold uppercase tracking-wider mb-2">{p.name}</div>
+                <div className="text-4xl font-black text-[#0a0a0a] mb-3">{p.price}</div>
+                <p className="text-[#888] text-sm leading-relaxed mb-5">{p.desc}</p>
+                <ul className="flex flex-col gap-2.5 mb-7 flex-1">
+                  {p.features.map(f => (
+                    <li key={f} className="flex items-center gap-2.5 text-sm text-[#555]">
+                      <span className="text-[#00d4aa] font-bold">✓</span>{f}
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href={p.href}
-                  className={`h-10 rounded-lg flex items-center justify-center text-sm font-bold transition-all ${
-                    p.highlight
-                      ? "bg-[#00d4aa] text-[#080808] hover:bg-[#00b894]"
-                      : "border border-[#2e2e2e] text-white hover:border-[#00d4aa]/40"
-                  }`}
-                >
-                  {p.cta}
-                </Link>
+                <Link href={p.href} className={`h-11 rounded-xl flex items-center justify-center text-sm font-bold transition-all ${
+                  p.highlight
+                    ? "bg-[#00d4aa] text-white hover:bg-[#00b894]"
+                    : "border border-[#e0e0e0] text-[#0a0a0a] hover:border-[#0a0a0a]"
+                }`}>{p.cta}</Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA BANNER ────────────────────────────────────────────────────────── */}
-      <section className="py-24 px-6 border-t border-[#111]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6">
-            Your music is already
-            <br />
-            <span className="gradient-text">earning money.</span>
-            <br />
-            Are you collecting it?
-          </h2>
-          <p className="text-[#a0a0a0] text-base mb-8">
-            The average independent artist misses $3,000–$12,000 per year
-            in uncollected royalties. Find yours in 60 seconds — free.
-          </p>
-          <Link
-            href="/audit"
-            className="inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-[#00d4aa] text-[#080808] font-bold text-lg hover:bg-[#00b894] transition-all glow"
-          >
-            Start your free audit →
+      {/* ── FREE TOOLS ── */}
+      <section className="py-6 px-6 border-t border-[#f0f0f0]">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-[#e8e8e8] bg-[#fafafa] px-8 py-6">
+          <div>
+            <div className="text-[#00b894] text-xs font-bold uppercase tracking-wider mb-1">Free forever</div>
+            <p className="text-[#0a0a0a] font-bold text-base">Split sheets, release checklists, artist invoices — no account needed.</p>
+          </div>
+          <Link href="/tools"
+            className="flex-shrink-0 h-10 px-6 rounded-xl border border-[#00d4aa] text-[#00b894] font-semibold text-sm flex items-center hover:bg-[#00d4aa]/5 transition-colors whitespace-nowrap">
+            Browse free tools →
           </Link>
-          <p className="text-[#555] text-sm mt-4">No credit card · No account needed · 60 seconds</p>
         </div>
       </section>
 
-      {/* ── FOOTER ────────────────────────────────────────────────────────────── */}
-      <footer className="border-t border-[#111] px-6 py-12">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-between gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-6 h-6 rounded-md bg-gradient-to-br from-[#00d4aa] to-[#00b4d8]" />
-              <span className="font-bold text-sm">MusicRight<span className="text-[#00d4aa]">.AI</span></span>
-            </div>
-            <p className="text-[#555] text-xs max-w-xs leading-relaxed">
-              Royalty operations for independent artists. Find your gaps. Fix your rights. Collect your money.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-sm">
-            <div>
-              <div className="text-white font-semibold mb-3">Product</div>
-              <div className="flex flex-col gap-2 text-[#555]">
-                <Link href="/audit" className="hover:text-[#a0a0a0]">Free Audit</Link>
-                <Link href="/dashboard" className="hover:text-[#a0a0a0]">Dashboard</Link>
-                <Link href="#pricing" className="hover:text-[#a0a0a0]">Pricing</Link>
-              </div>
-            </div>
-            <div>
-              <div className="text-white font-semibold mb-3">Rights</div>
-              <div className="flex flex-col gap-2 text-[#555]">
-                <span>ASCAP Registration</span>
-                <span>The MLC Setup</span>
-                <span>SoundExchange</span>
-                <span>DMCA Takedowns</span>
-              </div>
-            </div>
-            <div>
-              <div className="text-white font-semibold mb-3">Company</div>
-              <div className="flex flex-col gap-2 text-[#555]">
-                <span>musicright.ai</span>
-                <span className="text-[#00d4aa] text-xs">contact@musicright.ai</span>
-              </div>
-            </div>
+      {/* ── BOTTOM CTA ── */}
+      <section className="py-28 px-6 border-t border-[#f0f0f0]">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 text-[#0a0a0a]">
+            Start with one song.<br />
+            <span className="text-[#00d4aa]">We handle the rest.</span>
+          </h2>
+          <p className="text-[#888] text-lg mb-10 leading-relaxed">
+            Free to check. $5 to reserve your spot. Full setup when you&apos;re ready.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/start"
+              className="h-14 px-8 rounded-2xl bg-[#0a0a0a] text-white font-bold text-base flex items-center justify-center hover:bg-[#222] transition-all">
+              Check your song free →
+            </Link>
+            <Link href="/early-access"
+              className="h-14 px-8 rounded-2xl border-2 border-[#00d4aa] text-[#00d4aa] font-bold text-base flex items-center justify-center hover:bg-[#00d4aa]/5 transition-all">
+              $5 Early Access
+            </Link>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-[#111] flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#555]">
-          <span>© 2026 MusicRight.AI — All rights reserved</span>
-          <div className="flex gap-4">
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00d4aa]" />
-              Stripe secured
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00d4aa]" />
-              SOC 2 compliant
-            </span>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="border-t border-[#f0f0f0] px-6 py-10">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00d4aa] to-[#00b4d8] flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M10 2v7.5C10 10.9 8.8 12 7.2 12c-1.7 0-2.9-1-2.9-2.3C4.3 8.4 5.5 7.5 7.2 7.5c.6 0 1.1.1 1.8.4V2H10z" fill="#fff"/>
+              </svg>
+            </div>
+            <span className="font-bold text-[15px] tracking-tight text-[#0a0a0a]">MusicRight<span className="text-[#00d4aa]">.AI</span></span>
           </div>
+          <div className="flex items-center gap-6 text-sm text-[#999]">
+            <Link href="/tools" className="hover:text-[#0a0a0a] transition-colors">Free Tools</Link>
+            <Link href="/early-access" className="hover:text-[#0a0a0a] transition-colors">Early Access</Link>
+            <a href="mailto:contact@musicright.ai" className="hover:text-[#0a0a0a] transition-colors">Contact</a>
+            <Link href="/legal/terms" className="hover:text-[#0a0a0a] transition-colors">Terms</Link>
+            <Link href="/legal/privacy" className="hover:text-[#0a0a0a] transition-colors">Privacy</Link>
+          </div>
+          <span className="text-[#ccc] text-xs">© 2026 MusicRight.AI</span>
         </div>
       </footer>
     </div>
